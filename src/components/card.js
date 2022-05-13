@@ -22,6 +22,8 @@ const Card = (article) => {
   authPhoto.classList.add('authorPhoto');
   authName.classList.add('authorName');
 
+  headlineCont.textContent = article.data;
+
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -40,11 +42,19 @@ const Card = (article) => {
   //   </div>
   // </div>
   //
+  return cardDiv;
 }
 
 const cardAppender = (selector) => {
   const apper = document.querySelector(selector);
-  apper.appendChild(Card);
+  axios.get(`http://localhost:5001/api/articles`)
+.then((resp) => {
+apper.appendChild(Card())
+  console.log(resp.data);
+})
+.catch(() => {
+  console.log("error");
+})
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
@@ -55,12 +65,5 @@ const cardAppender = (selector) => {
   //
 }
 const apper = document.querySelector('.cards-container');
-axios.get(`http://localhost:5001/api/articles`)
-.then((resp) => {
-  apper.appendChild(Card(resp.data))
-  console.log(resp);
-})
-.catch(() => {
-  console.log("error");
-})
+
 export { Card, cardAppender }

@@ -13,7 +13,7 @@ const Tabs = (topics) => {
   topic.textContent = topics;
   topicOne.textContent = topics;
   
-  topics.appendChild(".tabs-container");
+  
   
   
   return topic;
@@ -36,17 +36,7 @@ const Tabs = (topics) => {
 const tabsAppender = (selector) => {
   const apper = document.querySelector(selector);
   apper.appendChild(Tabs(Tabs.topic))
- axios.get("http://localhost:5001/api/topics")
- .then(resp => {
-     resp.topics.forEach(() => {
-    
-  });
-  
-   console.log(resp);
- })
- .catch(error => {
-   console.log(error);
- })
+ 
   // TASK 4
   // ---------------------
   // Implement this function which takes a css selector as its only argument.
@@ -57,5 +47,15 @@ const tabsAppender = (selector) => {
   
   console.log(apper);
 }
-
+axios.get("http://localhost:5001/api/topics")
+ .then(resp => {
+     resp.topics.forEach(() => {
+    
+  });
+  
+   console.log(resp);
+ })
+ .catch(error => {
+   console.log(error);
+ })
 export { Tabs, tabsAppender }
